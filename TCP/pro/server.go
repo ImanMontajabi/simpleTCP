@@ -1,1 +1,5 @@
-package pro
+package main
+
+func main() {
+
+}
