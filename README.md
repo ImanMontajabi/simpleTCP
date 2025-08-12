@@ -1,4 +1,4 @@
-There are three main steps to building a concurrent TCP server. Keep these three steps in mind:
+There are three main steps to building a concurrent TCP server:
 
 1.  **Listen:** The server starts listening on a specific address and port to see if anyone connects.
 2.  **Accept:** As soon as a client (user) requests a connection, the server accepts it.

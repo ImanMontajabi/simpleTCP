@@ -1,0 +1,44 @@
+<html>
+<head>
+    <title>WebSocket Echo Client</title>
+</head>
+<body>
+<h1>Websocket Tester</h1>
+<input id="messageInput" type="text" placeholder="Write your message here"/>
+<button id="sendButton">ارسال</button>
+<h2>Server Answer: </h2>
+<div id="messages"></div>
+
+<script>
+    const socket = new WebSocket("ws://localhost:8080/ws");
+    socket.onopen = function(event) {
+        console.log("Websocket successfully connected");
+        document.getElementById("messages").innerHTML += "<p><em>Connected</em></p>";
+    };
+
+    socket.onmessage = function(event) {
+        console.log("Message received: ", event.data);
+        document.getElementById("messages").innerHTML += "<p>Server: " + event.data + "</p>";
+    };
+
+    socket.onerror = function(error) {
+        console.log("Websocket error: ", error);
+    };
+
+    socket.onclose = function(event) {
+        console.log("اتصال وب‌سوکت بسته شد.");
+        document.getElementById("messages").innerHTML += "<p><em>Disconnected!</em></p>";
+    };
+
+    document.getElementById("sendButton").onclick = function() {
+        const input = document.getElementById("messageInput");
+        const message = input.value;
+        if (message) {
+            socket.send(message);
+            document.getElementById("messages").innerHTML += "<p>You: " + message + "</p>";
+            input.value = "";
+        }
+    };
+</script>
+</body>
+</html>
